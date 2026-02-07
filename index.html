@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>🔥 Stylish Name Generator 🔥</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Replace this with your actual Google site verification code -->
+<meta name="google-adsense-account" content="ca-pub-3617125493283204">
+
+<title>🔥 Stylish Name Generator 🔥</title>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3617125493283204"
+     crossorigin="anonymous"></script>
 
 <style>
 body{
@@ -87,11 +95,21 @@ footer{
 }
 </style>
 </head>
-
 <body>
 <div class="container">
 <h1>🔥 Stylish Name Generator 🔥</h1>
 <p class="description">Enter your name below and get tons of stylish, fancy, and decorated versions ready to copy!</p>
+
+<!-- Top Ad Unit -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3617125493283204"
+     data-ad-slot="1234567890"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 
 <input id="nameInput" placeholder="Enter your name">
 <button class="btn" onclick="generate()">Generate</button>
@@ -110,6 +128,7 @@ footer{
     <li>Multiple stylish fonts to make your name unique.</li>
     <li>Cool symbols and wrappers like stars, flames, and crowns.</li>
     <li>Easy copy: tap any style to copy instantly!</li>
+    <li>Pagination: view results in batches of 15 for easy browsing.</li>
     <li>Free & fast – no downloads required.</li>
   </ul>
 </div>
@@ -155,7 +174,7 @@ const wrappers = [
 /* ================= LOGIC ================= */
 let styles=[];
 let page=0;
-const perPage=15; // Show 15 results per page
+const perPage=15; // 15 results per page
 
 function stylize(text,font){
   return text.split("").map(c=>font[c]||c).join("");
