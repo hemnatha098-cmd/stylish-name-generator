@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🔥 Stylish Name Generator 🔥</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0f0f0f;
+  color:#fff;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+h1{
+  text-align:center;
+  margin-bottom:10px;
+  color:#ff0055;
+}
+p.description{
+  text-align:center;
+  margin-bottom:20px;
+  opacity:0.8;
+}
+input{
+  width:100%;
+  padding:12px;
+  font-size:18px;
+  border-radius:8px;
+  border:none;
+  outline:none;
+}
+button{
+  margin-top:10px;
+  padding:12px 18px;
+  font-size:16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+.btn{
+  background:#ff0055;
+  color:#fff;
+}
+.nav{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin:15px 0;
+}
+#results{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  margin-top:10px;
+}
+.style{
+  background:#1c1c1c;
+  padding:12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+.style:hover{
+  background:#2b2b2b;
+}
+.style small{
+  display:block;
+  opacity:.6;
+  font-size:12px;
+}
+footer{
+  text-align:center;
+  opacity:.6;
+  margin:20px 0;
+}
+.info{
+  margin-top:20px;
+  font-size:14px;
+  opacity:0.7;
+  line-height:1.5;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>🔥 Stylish Name Generator 🔥</h1>
+<p class="description">Enter your name below and get tons of stylish, fancy, and decorated versions ready to copy!</p>
+
+<input id="nameInput" placeholder="Enter your name">
+<button class="btn" onclick="generate()">Generate</button>
+
+<div id="results"></div>
+
+<div class="nav">
+  <button onclick="prevPage()">⬅ Prev</button>
+  <span id="pageInfo"></span>
+  <button onclick="nextPage()">Next ➡</button>
+</div>
+
+<div class="info">
+  <h3>Features:</h3>
+  <ul>
+    <li>Multiple stylish fonts to make your name unique.</li>
+    <li>Cool symbols and wrappers like stars, flames, and crowns.</li>
+    <li>Easy copy: tap any style to copy instantly!</li>
+    <li>Free & fast – no downloads required.</li>
+  </ul>
+</div>
+
+<footer>🔥 Tap a style to copy it to clipboard • Made with ❤️</footer>
+</div>
+
+<script>
+/* ================= FONT MAPS ================= */
+const fonts = [
+{
+a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",j:"𝐣",k:"𝐤",l:"𝐥",m:"𝐦",
+n:"𝐧",o:"𝐨",p:"𝐩",q:"𝐪",r:"𝐫",s:"𝐬",t:"𝐭",u:"𝐮",v:"𝐯",w:"𝐰",x:"𝐱",y:"𝐲",z:"𝐳",
+A:"𝐀",B:"𝐁",C:"𝐂",D:"𝐃",E:"𝐄",F:"𝐅",G:"𝐆",H:"𝐇",I:"𝐈",J:"𝐉",K:"𝐊",L:"𝐋",M:"𝐌",
+N:"𝐍",O:"𝐎",P:"𝐏",Q:"𝐐",R:"𝐑",S:"𝐒",T:"𝐓",U:"𝐔",V:"𝐕",W:"𝐖",X:"𝐗",Y:"𝐘",Z:"𝐙"
+},
+{
+a:"𝓪",b:"𝓫",c:"𝓬",d:"𝓭",e:"𝓮",f:"𝓯",g:"𝓰",h:"𝓱",i:"𝓲",j:"𝓳",k:"𝓴",l:"𝓵",m:"𝓶",
+n:"𝓷",o:"𝓸",p:"𝓹",q:"𝓺",r:"𝓻",s:"𝓼",t:"𝓽",u:"𝓾",v:"𝓿",w:"𝔀",x:"𝔁",y:"𝔂",z:"𝔃",
+A:"𝓐",B:"𝓑",C:"𝓒",D:"𝓓",E:"𝓔",F:"𝓕",G:"𝓖",H:"𝓗",I:"𝓘",J:"𝓙",K:"𝓚",L:"𝓛",M:"𝓜",
+N:"𝓝",O:"𝓞",P:"𝓟",Q:"𝓠",R:"𝓡",S:"𝓢",T:"𝓣",U:"𝓤",V:"𝓥",W:"𝓦",X:"𝓧",Y:"𝓨",Z:"𝓩"
+},
+{
+a:"𝖆",b:"𝖇",c:"𝖈",d:"𝖉",e:"𝖊",f:"𝖋",g:"𝖌",h:"𝖍",i:"𝖎",j:"𝖏",k:"𝖐",l:"𝖑",m:"𝖒",
+n:"𝖓",o:"𝖔",p:"𝖕",q:"𝖖",r:"𝖗",s:"𝖘",t:"𝖙",u:"𝖚",v:"𝖛",w:"𝖜",x:"𝖝",y:"𝖞",z:"𝖟",
+A:"𝕬",B:"𝕭",C:"𝕮",D:"𝕯",E:"𝕰",F:"𝕱",G:"𝕲",H:"𝕳",I:"𝕴",J:"𝕵",K:"𝕶",L:"𝕷",M:"𝕸",
+N:"𝕹",O:"𝕺",P:"𝕻",Q:"𝕼",R:"𝕽",S:"𝕾",T:"𝕿",U:"𝖀",V:"𝖁",W:"𝖂",X:"𝖃",Y:"𝖄",Z:"𝖅"
+}
+];
+
+/* ================= WRAPPERS & SYMBOLS ================= */
+const wrappers = [
+["",""],["★","★"],["☆","☆"],["✦","✦"],["✧","✧"],
+["꧁","꧂"],["『","』"],["【","】"],["〖","〗"],
+["༒","༒"],["⚡","⚡"],["🔥","🔥"],["💀","💀"],
+["👑","👑"],["😈","😈"],["☠","☠"],
+["乂","乂"],["×͜×","×͜×"],["ツ","ツ"],
+["♛","♛"],["⚔","⚔"],["⫷","⫸"],
+["༺","༻"],["彡","彡"],["✪","✪"],
+["𓆩","𓆪"],["ꜱ","ꜱ"],["꧁༺","༻꧂"]
+];
+
+/* ================= LOGIC ================= */
+let styles=[];
+let page=0;
+const perPage=15; // Show 15 results per page
+
+function stylize(text,font){
+  return text.split("").map(c=>font[c]||c).join("");
+}
+
+function generate(){
+  const name=document.getElementById("nameInput").value.trim();
+  if(!name) return;
+
+  styles=[];
+  page=0;
+
+  fonts.forEach(f=>{
+    wrappers.forEach(w=>{
+      styles.push(w[0] + stylize(name,f) + w[1]);
+    });
+  });
+
+  render();
+}
+
+function render(){
+  const box=document.getElementById("results");
+  box.innerHTML="";
+  styles.slice(page*perPage,(page+1)*perPage).forEach(t=>{
+    const d=document.createElement("div");
+    d.className="style";
+    d.innerHTML=t+"<small>Tap to copy</small>";
+    d.onclick = () => {
+      navigator.clipboard.writeText(t);
+      d.querySelector('small').textContent = 'Copied!';
+      setTimeout(()=>d.querySelector('small').textContent='Tap to copy',1000);
+    };
+    box.appendChild(d);
+  });
+
+  document.getElementById('pageInfo').textContent = `Page ${page+1} of ${Math.ceil(styles.length/perPage)}`;
+}
+
+function nextPage(){
+  if((page+1)*perPage<styles.length){page++;render();}
+}
+function prevPage(){
+  if(page>0){page--;render();}
+}
+</script>
+</body>
+</html>
